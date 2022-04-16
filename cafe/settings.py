@@ -25,7 +25,7 @@ SECRET_KEY = 'pp72re#@d%a=p%!y9)#z*2)jq%&qri21ixq+&kw^_)8f%avkzv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://officeeats.azurewebsites.net']
 
 
 # Application definition
