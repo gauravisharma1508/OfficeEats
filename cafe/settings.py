@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'pp72re#@d%a=p%!y9)#z*2)jq%&qri21ixq+&kw^_)8f%avkzv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['officeeats.azurewebsites.net']
+ALLOWED_HOSTS = ['office-eats.azurewebsites.net']
 
 
 # Application definition
