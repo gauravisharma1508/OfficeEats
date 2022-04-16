@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="row">
+{% for product in products %}
+ <div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
+  <img src="{{ product.image.url }}" class="card-img-top" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{product.name}}</h5>
+    <p class="card-text"><b>{{ product.price}}</b></p>
+   </div>
+    <div class="card-footer no-gutters">
+
+
+</div>
+</div>
+
+{% endfor %}
+</div>
+</body>
+</html>

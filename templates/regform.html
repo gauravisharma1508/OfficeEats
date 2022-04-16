@@ -1,0 +1,108 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration Form | OfficEats</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'reg/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+    <link rel="shortcut icon" href="{% static 'ind/images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'ind/images/apple-touch-icon.png' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'reg/css/style.css' %}">
+</head>
+<body>
+
+    <div class="main">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-img">
+                    <img src="{% static 'reg/images/register.jpg' %}" alt="" style="height:auto; width:100%;">
+                </div>
+                <div class="signup-form">
+
+                    <form method="POST" enctype="multipart/form-data" action="/register" class="register-form" id="register-form">
+
+                          {% csrf_token %}
+
+                            <div class="alert alert-danger" role="alert" style="color:red; font-weight:bold; font-size:18px;">
+                               {{error}}
+                            </div>
+                            <h2>Registration Form</h2>
+                            <div class="form-group">
+                                <label for="fname">Full Name:</label>
+                                <input type="text" name="fname" id="fname" placeholder="Name" value="{{values.fname}}" required>
+                            </div>
+
+
+                        <div class="form-group">
+                            <label for="oname">Organization Name:</label>
+                            <input type="text" name="oname" id="oname" placeholder="Name of Organization" value="{{values.oname}}" required>
+                        </div>
+
+
+
+                            <div class="form-group">
+                                <label for="state">Employee ID No.:</label>
+                                 <input type="text" name="emp_id" id="emp_id" placeholder="Employee ID" value="{{values.emp_id}}" required>
+                            </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="mobile">Mobile No.:</label>
+                                <input type="text" name="mob" placeholder="Mobile No." value="{{values.mob}}" required>
+                            </div>
+
+                        <div class="form-group">
+                            <label for="email">Email ID :</label>
+                            <input type="email" name="email" id="email" placeholder="example@email.com" value="{{values.email}}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label hidden class="label">Password:</label>
+                                    <input hidden required class="input--style-4" type="password" placeholder="******" name="password" value="{{values.password}}">
+                                </div>
+                                
+                         <div class="form-group">
+                                    <label for="id">Upload ID Card :</label>
+                                    <input required type='file' id="image" name="image" accept="image/x-png,image/gif,image/jpeg"  onchange="readURL(this);" />
+    <img id="blah" />
+
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+<script>
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+</div>
+
+                        <div class="form-submit">
+                            <input type="submit" value="Submit Form" class="submit" name="submit" id="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'reg/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'reg/js/main.js' %}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

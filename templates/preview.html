@@ -1,0 +1,119 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Preview Form | OfficEats</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'reg/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+    <link rel="shortcut icon" href="{% static 'ind/images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'ind/images/apple-touch-icon.png' %}">
+
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'reg/css/preview.css' %}">
+    <style>
+       p {
+        width: 100%;
+  padding: 6px 10px;
+  margin: 5px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size:15px;
+       }
+       .register-form{
+       	padding-top:4px;
+       }
+     </style>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+        	$('#submitBtn').click(function () {
+            });
+            $('#submit').click(function () {
+                window.location.href = "{% url 'signin' %}";
+            });
+        });
+    </script>
+
+
+</head>
+<body>
+     <div class="main">
+        <div class="preview">
+        <div class="container" style="width:100%;">
+            <div class="signup-content">
+                </div>
+                <div class="signup-form">
+                    <div  class="register-form" id="register-form">
+                        <h2>Preview Form</h2>
+                        {% for item in all %}
+                        <div class="form-group">
+                                <label for="fname">Full Name:</label>
+                                <p>{{ item.fname }}</p>
+                            </div>
+                        <div class="form-group">
+                            <label for="oname">Organization Name:</label>
+                            <p>{{ item.oname }}</p>
+                        </div>
+
+                         <div class="form-group">
+                                <label for="state">Employee ID No.:</label>
+                                <p>{{ item.emp_id }}</p>
+                            </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="mobile">Mobile No.:</label>
+                                <p>{{ item.mob }}</p>
+                            </div>
+
+
+                        <div class="form-group">
+                            <label for="email">Email ID:</label>
+                            <p>{{ item.email }}</p>
+                        </div>
+                        </div>
+
+
+    <div class="form-group">
+                                    <label for="id">ID Card:</label>
+    <img src="{{BASE_DIR}}{{ item.image.url }}" class="card-img-top" alt="Card image cap"><br>
+</div>
+
+<input type="button" name="btn" value="Submit" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-default" style="background: #ff6801; text-transform:uppercase; color:white;"/>
+
+<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Confirm Submission
+                </div>
+                <div class="modal-body">
+                     <h4>Your Registration ID is:</h4><h2 style="color:red; font-weight:bold;">{{ item.reg_id }}</h2>
+                <!-- We display the details entered by the user here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="border:none;">CANCEL</button>
+                    <a href="#" id="submit" class="btn btn-success success" style="border:none;">PROCEED</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+</div>
+</div>
+
+
+<script src="{% static 'reg/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'reg/js/main.js' %}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

@@ -1,0 +1,492 @@
+{% load static %}
+{% load cart %}
+{% load custom_filter %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+
+    <!-- Site Metas -->
+    <title>OfficEats- Your own office cafeteria</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="{% static 'ind/images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'ind/images/apple-touch-icon.png' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'ind/css/bootstrap.min.css' %}">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="{% static 'ind/css/style.css' %}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'ind/css/responsive.css' %}">
+    <!-- color -->
+    <link id="changeable-colors" rel="stylesheet" href="{% static 'ind/css/colors/orange.css' %}" />
+
+    <!-- Modernizer -->
+    <script src="{% static 'ind/js/modernizer.js' %}"></script>
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <div id="loader">
+        <div id="status"></div>
+    </div>
+    <div id="site-header">
+        <header id="header" class="header-block-top">
+            <div class="container">
+                <div class="row">
+                    <div class="main-menu">
+                        <!-- navbar -->
+                        <nav class="navbar navbar-default" id="mainNav">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                                <i class="fa fa-bars"></i>
+                                </button>
+                                <div class="logo" >
+                                    <a class="navbar-brand js-scroll-trigger logo-header" href="{% url 'index' %}">
+                                        <img src="{% static 'ind/images/logo2.png' %}" alt="" style="width:120px;">
+                                    </a>
+                                </div>
+                            </div>
+                             <div id="navbar" class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="active"><a href="{% url 'index' %}">Home</a></li>
+                                    <li><a href="{% url 'index' %}#about">About us</a></li>
+                                    <li><a href="{% url 'menu' %}">Menu</a></li>
+                                    <li><a href="#footer">Contact us</a></li>
+                                    <li><a href="/cart"><i class="fa fa-shopping-bag"><span class="badge badge-info">{{request.session.cart.keys|length}}</span>
+                                <span class="sr-only">(current)</span></i></a></li>
+
+                     
+                        
+                        <li class="dropdown"><a href ="#"><i class="fa fa-user"></i> {{request.session.name}}</a>
+                            <div class="dropdown-content">
+                            <a href="{% url 'order' %}">Your Orders</a>
+                            <a href="{% url 'logout' %}">Logout</a>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+                            <!-- end nav-collapse -->
+                        </nav>
+                        <!-- end navbar -->
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container-fluid -->
+        </header>
+        <!-- end header -->
+    </div>
+	<!-- end site-header -->
+	
+    <div id="banner" class="banner full-screen-mode parallax">
+
+        <div class="container pr">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="banner-static">
+                    <div class="banner-text">
+                        <div class="banner-cell">
+
+                            <h1>Be it <span class="typer" id="some-id" data-delay="300" data-delim=":" data-words="Breakfast:Lunch:Snacks:Tea:Coffee:Treats" data-colors="red"></span><span class="cursor" data-cursorDisplay="_" data-owner="some-id"></span></h1><br>
+                            <h2>You've OfficEats.</h2><p>Your own office cafeteria to fufill your <span>hunger and cravings.</span></p>
+                            <div class="book-btn">
+                                <a href="{% url 'menu' %}" class="table-btn hvr-underline-from-center">Go to Menu</a>
+                            </div>
+                           
+                        </div>
+                        <!-- end banner-cell -->
+                    </div>
+                    <!-- end banner-text -->
+                </div>
+                <!-- end banner-static -->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end banner -->
+
+    <div id="about" class="about-main pad-top-100 pad-bottom-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.1s">
+                        <h2 class="block-title">About Us</h2>
+                        <div class="flower"><p>We are OfficEats.</p></div>
+
+                        <p> We are consistenly working on providing food services to employees and staff. We believe in providing best food to our customers with everything taken good care of.</p>
+
+                        <p> With an aim of serving delicacy mixed with the traditional taste of our culture, we are improving each day.  </p>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="wow fadeIn" data-wow-duration="0.6s" data-wow-delay="0.1s">
+                        <div class="about-images">
+                            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+                            <source src="{% static 'ind/images/video.mp4' %}" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+
+
+    <div class="exp pad-top-100 parallax">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+                        <h6>- GIVE US A CHANCE -</h6>
+                        <p>To serve our delicious food</p>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+   <div id="menu" class="menu-main pad-top-100 pad-bottom-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+                        <h2 class="block-title text-center">
+						Our Menu 	
+					</h2>
+                        <p class="title-caption text-center">These are some of the dishes that are most loved by the customers and have always been on the priority list. To view more dishes, click the menu button. </p>
+                    </div>
+                    <div class="tab-menu">
+                        <div class="slider slider-nav">
+                            <div class="tab-title-menu">
+                                <h2>SNACKS</h2>
+                                <p> <i class="flaticon-desert"></i> </p>
+                            </div>
+                            <div class="tab-title-menu">
+                                <h2>BEVERAGES</h2>
+                                <p> <i class="flaticon-coffee"></i> </p>
+                            </div>
+                            <div class="tab-title-menu">
+                                <h2>VEGGIES</h2>
+                                <p> <i class="flaticon-dinner"></i> </p>
+                            </div>
+                            <div class="tab-title-menu">
+                                <h2>BREADS</h2>
+                                <p> <i class="flaticon-canape"></i> </p>
+                            </div>
+                        </div>
+                        <div class="slider slider-single">
+                            <div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                    <div class="offer-item">
+                                        <img src="{% static 'ind/images/img1.jpg' %}" alt="" class="img-responsive">
+                                        <div>
+                                            <h3>PANEER TIKKA</h3>
+                                            <p>
+                                                Chunks of paneer marinated in spices and grilled in tandoor.
+                                            </p>
+                                        </div>
+                                        <span class="offer-price"> ₹80</span>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                    <div class="offer-item">
+                                        <img src="{% static 'ind/images/img1.jpg' %}" alt="" class="img-responsive">
+                                        <div>
+                                            <h3>MIXED SALAD</h3>
+                                            <p>
+                                                Mixture of raw or cold foods such as lettuce, cucumber, and tomatoes.
+                                            </p>
+                                        </div>
+                                        <span class="offer-price"> ₹120</span>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                    <div class="offer-item">
+                                        <img src="{% static 'ind/images/img1.jpg' %}" alt="" class="img-responsive">
+                                        <div>
+                                            <h3>FRIED MOMOS</h3>
+                                            <p>
+                                                Fried momos give a unique, crunchy spin to the soft and fluffy steamed momos.
+                                            </p>
+                                        </div>
+                                        <span class="offer-price"> ₹60</span>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            <div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                    <div class="offer-item">
+                                        <img src="{% static 'ind/images/img1.jpg' %}" alt="" class="img-responsive">
+                                        <div>
+                                            <h3>COLD COFFEE</h3>
+                                            <p>
+                                               Coffee beverage served chilled, brewed variously with the division being cold brew 
+                                            </p>
+                                        </div>
+                                        <span class="offer-price"> ₹40</span>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                    <div class="offer-item">
+                                        <img src="{% static 'ind/images/img1.jpg' %}" alt="" class="img-responsive">
+                                        <div>
+                                            <h3>LEMON TEA</h3>
+                                            <p>
+                                                A refreshing tea where lemon juice is added in black or green tea. It soothes the throat.
+                                            </p>
+                                        </div>
+                                        <span class="offer-price"> ₹15</span>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                    <div class="offer-item">
+                                        <img src="{% static 'ind/images/img1.jpg' %}" alt="" class="img-responsive">
+                                        <div>
+                                            <h3>OREO SHAKE</h3>
+                                            <p>
+                                                A milk shake flavoured vanilla having chunks of oreo.
+                                            </p>
+                                        </div>
+                                        <span class="offer-price"> ₹70</span>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            <div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                    <div class="offer-item">
+                                        <img src="{% static 'ind/images/img1.jpg' %}" alt="" class="img-responsive">
+                                        <div>
+                                            <h3>CHANA MASALA</h3>
+                                            <p>
+                                                A delicious & flavorful Indian curry made by chickpeas in a spicy gravy.
+                                            </p>
+                                        </div>
+                                        <span class="offer-price"> ₹90</span>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                    <div class="offer-item">
+                                        <img src="{% static 'ind/images/img1.jpg' %}" alt="" class="img-responsive">
+                                        <div>
+                                            <h3>RAJMA KI SABJI</h3>
+                                            <p>
+                                                A protein rich Red Kidney Beans curry, is best enjoyed with steamed rice as Rajma Chawal
+                                            </p>
+                                        </div>
+                                        <span class="offer-price"> ₹120</span>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                    <div class="offer-item">
+                                        <img src="{% static 'ind/images/img1.jpg' %}" alt="" class="img-responsive">
+                                        <div>
+                                            <h3>PALAK PANEER</h3>
+                                            <p>
+                                                Dish consisting of paneer in a thick paste made from puréed spinach.
+                                            </p>
+                                        </div>
+                                        <span class="offer-price"> ₹80</span>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            <div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                    <div class="offer-item">
+                                        <img src="{% static 'ind/images/img1.jpg' %}" alt="" class="img-responsive">
+                                        <div>
+                                            <h3>PANEER PARATHA</h3>
+                                            <p>
+                                                A popular Indian paratha made with a stuffing of paneer, coriander and green chillies. 
+                                            </p>
+                                        </div>
+                                        <span class="offer-price"> ₹50</span>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                    <div class="offer-item">
+                                        <img src="{% static 'ind/images/img1.jpg' %}" alt="" class="img-responsive">
+                                        <div>
+                                            <h3>GARLIC BREAD</h3>
+                                            <p>
+                                               Garlic bread consists of bread, topped with garlic and olive oil or butter 
+                                            </p>
+                                        </div>
+                                        <span class="offer-price"> ₹100</span>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                    <div class="offer-item">
+                                        <img src="{% static 'ind/images/img1.jpg' %}" alt="" class="img-responsive">
+                                        <div>
+                                            <h3>BUTTER TANDOORI ROTI</h3>
+                                            <p>
+                                               Tandoori Roti is an unleavened flatbread and is mostly made using whole wheat
+                                            </p>
+                                        </div>
+                                        <span class="offer-price"> ₹15</span>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end tab-menu -->
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+            <div class="book-btn" style="padding-left:40%; padding-top:20px;">
+                                <a href="{% url 'menu' %}" class="table-btn hvr-underline-from-center">Go to Menu</a>
+                            </div>
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end menu -->
+
+
+
+
+
+
+   
+
+    <div id="footer" class="footer-main">
+        <div class="footer-box pad-top-70">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-in-main">
+                        
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-a">
+                                <h3>About OfficEats</h3>
+                                <p>OfficEats is an online office cafeteria that has been designed as a demo application to order food, snacks and beverages. It has been designed and developed by a team of three.i.e., Shagun Mishra, Gauravi Sharma and Vaibhav Sharma.</p>
+
+                            </div>
+                            <!-- end footer-box-a -->
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-b">
+                                <h3>New in Menu</h3>
+                                <ul>
+                                    <li><a href="{% url 'menu' %}">Home Style Pasta</a></li>
+                                    <li><a href="{% url 'menu' %}">Palak Pakora</a></li>
+                                    <li><a href="{% url 'menu' %}">Dahi Bhalle</a></li>
+                                    <li><a href="{% url 'menu' %}">Sabudana Khichdi</a></li>
+                                </ul>
+                            </div>
+                            <!-- end footer-box-b -->
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-c">
+                                <h3>Contact Us</h3>
+                                <ul>
+                                    <li>
+                                    <i class="fa fa-map-signs" aria-hidden="true"></i>
+                                    <span>Address: Mumbai, India</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                                    <span>
+									Phone: 1234567890
+								</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <span><a href="#">Email: officeats@gmail.com</a></span>
+                                </li>
+                            </ul>
+                            </div>
+                            <!-- end footer-box-c -->
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-d">
+                                <h3>Opening Hours</h3>
+
+                                <ul>
+                                    <li>
+                                        <p>Monday - Friday</p>
+                                        <span> 9:00 AM - 8:00 PM</span>
+                                    </li>
+                                    <li>
+                                        <p>Saturday - Sunday</p>
+                                        <span>  11:00 AM - 5:00 PM</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end footer-box-d -->
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end footer-in-main -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+            <div id="copyright" class="copyright-main"  style="background-color: black;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h6 class="copy-title"> All Rights Reserved. &copy; 2021 OfficEats Designed and Developed by GVS <a href="#" target="_blank"></a> </h6>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end container -->
+            </div>
+            <!-- end copyright-main -->
+        </div>
+        <!-- end footer-box -->
+    </div>
+    <!-- end footer-main -->
+
+    <a href="#" class="scrollup" style="display: none;">Scroll</a>
+
+    
+
+    <!-- ALL JS FILES -->
+    <script src="{% static 'ind/js/all.js' %}"></script>
+    <script src="{% static 'ind/js/bootstrap.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="{% static 'ind/js/custom.js' %}"></script>
+</body>
+
+</html>

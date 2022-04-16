@@ -1,0 +1,291 @@
+{% load static %}
+{% load cart %}
+{% load custom_filter %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+
+    <!-- Site Metas -->
+    <title>Menu | OfficEats</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="{% static 'ind/images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'ind/images/apple-touch-icon.png' %}">
+    <link rel="stylesheet" href="{% static 'ind/css/card.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'ind/css/bootstrap.min.css' %}">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="{% static 'ind/css/style.css' %}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'ind/css/responsive.css' %}">
+    <!-- color -->
+    <link id="changeable-colors" rel="stylesheet" href="{% static 'ind/css/colors/orange.css' %}" />
+
+    <!-- Modernizer -->
+    <script src="{% static 'ind/js/modernizer.js' %}"></script>
+
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <body class="menu-bg">
+
+        <header id="header" class="header-block-top" style="background-color:white;">
+            <div class="container">
+                <div class="row">
+                    <div class="main-menu">
+                        <!-- navbar -->
+                        <nav class="navbar navbar-default" id="mainNav">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <div class="logo" >
+                                    <a class="navbar-brand js-scroll-trigger logo-header" href="{% url 'index' %}">
+                                        <img src="{% static 'ind/images/logo2.png' %}" alt="" style="width:120px;">
+                                    </a>
+                                </div>
+                            </div>
+                             <div id="navbar" class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="active"><a href="{% url 'index' %}">Home</a></li>
+                                    <li><a href="{% url 'index' %}#about">About us</a></li>
+                                    <li><a href="{% url 'menu' %}">Menu</a></li>
+                                    <li><a href="#footer">Contact us</a></li>
+                                    <li><a href="/cart"><i class="fa fa-shopping-bag"><span class="badge badge-info">{{request.session.cart.keys|length}}</span>
+                                <span class="sr-only">(current)</span></i></a></li>
+
+                     
+                        
+                        <li class="dropdown"><a href ="#"><i class="fa fa-user"></i> {{request.session.name}}</a>
+                            <div class="dropdown-content">
+                            <a href="{% url 'order' %}">Your Orders</a>
+                            <a href="{% url 'logout' %}">Logout</a>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+                            <!-- end nav-collapse -->
+                        </nav>
+                        <!-- end navbar -->
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container-fluid -->
+        </header>
+        <!-- end header -->
+
+
+    <div class="menu-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">OUR MENU</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="book-btn" style="padding:20px;"> <a href="{% url 'menu' %}">&#x2190;Back to Main Menu</a></div>
+
+     <div class="container" style="padding-top:40px; margin-bottom:20px; display:inline;">
+     <div class="row-fluid" >
+    {% for menu in menues %}
+<div class="card col-sm-3" style="width:29rem; margin-left:40px; margin-bottom:20px; border-radius:10px;">
+            
+        <img class="card-img-top" id={{menu.id}} src="{{ menu.image.url }}" alt="Dish Image" style="width:26rem; height:20rem; padding-top:10px; ">
+        <div class="card-body">
+        <h5 class="card-title" style="font-weight:bold;">{{menu.name}} &nbsp; &nbsp; &nbsp; Price: ₹{{menu.price}}</h5>
+      </div>
+          <div class="card-footer no-gutters">
+
+            {% if menu|is_in_cart:request.session.cart %}
+
+            <div class="bottom d-flex flex-row justify-content-center" >
+                <form action="" class="col-2 " method="post">
+                    {% csrf_token %}
+                    <input hidden type="text" name='menu' value='{{menu.id}}'>
+                    <input hidden type="text" name='remove' value='True'>
+                    <input type="submit" value=" - " class="btn btn-block btn-light border-right">
+                </form>
+
+                <div class="text-center col">{{menu|cart_quantity:request.session.cart}} in cart </div>
+                <form action="" class="col-2 " method="post">
+                    {% csrf_token %}
+                <input hidden  type="text" name='menu' value={{menu.id}}>
+                <input type="submit" value=" + " class="btn btn-block btn-secondary">
+            </form>
+          
+            </div>
+            {% else %}
+            <form action="" method="POST" class="btn-block">
+            {% csrf_token %}
+            <input hidden  type="text" name='menu' value={{menu.id}}>
+            <input type="submit" class="btn btn-light border form-control" value="Add To Cart"> 
+        </form>
+        {% endif %}
+          
+    </div>
+</div>
+
+{% endfor %}
+</div>
+</div>
+
+
+
+    <!-- Start Footer  -->
+  <div id="footer" class="footer-main">
+        <div class="footer-box pad-top-70">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-in-main">
+
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-a">
+                                <h3>About OfficEats</h3>
+                                <p>OfficEats is an online office cafeteria that has been designed as a demo application to order food, snacks and beverages. It has been designed and developed by a team of three.i.e., Shagun Mishra, Gauravi Sharma and Vaibhav Sharma.</p>
+                                <ul class="socials-box footer-socials pull-left">
+                                    <li>
+                                        <a href="#">
+                                            <div class="social-circle-border"><i class="fa  fa-facebook"></i></div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="social-circle-border"><i class="fa fa-twitter"></i></div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="social-circle-border"><i class="fa fa-google-plus"></i></div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="social-circle-border"><i class="fa fa-pinterest"></i></div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="social-circle-border"><i class="fa fa-linkedin"></i></div>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <!-- end footer-box-a -->
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-b">
+                                <h3>New in Menu</h3>
+                                <ul>
+                                    <li><a href="{% url 'menu' %}">Home Style Pasta</a></li>
+                                    <li><a href="{% url 'menu' %}">Palak Pakora</a></li>
+                                    <li><a href="{% url 'menu' %}">Dahi Bhalle</a></li>
+                                    <li><a href="{% url 'menu' %}">Sabudana Khichdi</a></li>
+                                </ul>
+                            </div>
+                            <!-- end footer-box-b -->
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-c">
+                                <h3>Contact Us</h3>
+                                <ul>
+                                    <li>
+                                    <i class="fa fa-map-signs" aria-hidden="true"></i>
+                                    <span>Address: Mumbai, India</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                                    <span>
+                                    Phone: 1234567890
+                                </span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <span><a href="#">Email: officeats@gmail.com</a></span>
+                                </li>
+                            </ul>
+                            </div>
+                            <!-- end footer-box-c -->
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-d">
+                                <h3>Opening Hours</h3>
+
+                                <ul>
+                                    <li>
+                                        <p>Monday - Friday</p>
+                                        <span> 9:00 AM - 8:00 PM</span>
+                                    </li>
+                                    <li>
+                                        <p>Saturday - Sunday</p>
+                                        <span>  11:00 AM - 5:00 PM</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end footer-box-d -->
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end footer-in-main -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+            <div id="copyright" class="copyright-main"  style="background-color: black;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h6 class="copy-title"> All Rights Reserved. &copy; 2021 OfficEats Designed and Developed by GVS <a href="#" target="_blank"></a> </h6>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end container -->
+            </div>
+            <!-- end copyright-main -->
+        </div>
+        <!-- end footer-box -->
+    </div>
+    <!-- end footer-main -->
+
+    <a href="#" class="scrollup" style="display: none;">Scroll</a>
+
+
+    <!-- ALL JS FILES -->
+    <script src="{% static 'ind/js/all.js' %}"></script>
+    <script src="{% static 'ind/js/bootstrap.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="{% static 'ind/js/custom.js' %}"></script>
+</body>
+
+</html>
