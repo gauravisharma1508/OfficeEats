@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'office-eats'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E2A2D78A104544B6AD8632EDE0DEB6F8 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CD34E8AB1D58421C8BE470E78E0E2EF0 }}
